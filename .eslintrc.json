@@ -1,0 +1,39 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-unused-vars": 
+            ["warn"],
+        "spaced-comment": 
+            ["warn", "always"],
+        "indent": 
+            ["error", "tab"],
+        "space-infix-ops":
+            ["error"],
+        "quotes":
+            ["error", "single"],
+        "semi": 
+            ["error", "always"],
+        "array-bracket-spacing": 
+            ["error", "never"],
+        "max-nested-callbacks": 
+            ["error", 4],
+        "new-parens": 
+            ["error"],
+        "no-unneeded-ternary": 
+            ["error", { "defaultAssignment": false }],
+        "no-restricted-syntax": 
+            ["error", "WithStatement"],
+        "no-plusplus": 
+            ["error"],
+        "no-nested-ternary": 
+            ["error"],
+        "no-cond-assign": 
+            ["error", "always"],
+        "no-console": 0
+    }
+}

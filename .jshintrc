@@ -1,0 +1,25 @@
+{
+	"esversion": 6,
+	"curly": true,
+	"unused": true,
+	"eqeqeq": true,
+	"freeze": true,
+	"latedef": "nofunc",
+	"noempty": true,
+	"plusplus": true,
+	"quotmark": "single",
+	"undef": true,
+	"unused": true,
+	"maxdepth": 10,
+	"node": true,
+	"browser": true,
+	"globals": {
+		/* MOCHA */
+		"describe": false,
+		"it": false,
+		"before": false,
+		"after": false,
+		"beforeEach": false,
+		"afterEach": false
+	}
+}

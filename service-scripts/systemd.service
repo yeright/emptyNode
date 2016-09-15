@@ -1,0 +1,25 @@
+[Unit]
+Description=Node.js realtime communication system
+
+[Service]
+User=athlete
+# Group=
+# Environment=NODE_ENV=production PORT=8080
+
+Type=forking 
+# 'forking' since shell wrapper daemonises our node instance
+
+WorkingDirectory=/home/athlete/realtime/current
+ExecStart=/home/athlete/realtime/current/relaunch.sh
+ExecStop=/home/athlete/realtime/current/shutdown.sh 
+# not required if we remove shell wrapper
+
+Restart=on-failure 
+# consider changing to 'always' for production
+
+#StandardOutput=syslog # we can output to systemd's log like this. (requires removing shell wrapper) 
+#StandardError=syslog
+#SyslogIdentifier=node-realtime
+
+[Install]
+WantedBy=multi-user.target

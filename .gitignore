@@ -1,0 +1,28 @@
+#Dephendency directory
+node_modules
+
+# config
+config/config.json
+
+# npm files
+npm-debug.log
+
+#IDE settings
+.idea
+.vscode
+sftp-config*
+
+# swap files
+*.swp
+
+# redis dump file
+*.rdb
+
+# nohup files
+nohup.*
+
+# logs dir
+/logs
+
+# python cache file
+*.pyc

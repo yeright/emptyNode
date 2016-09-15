@@ -1,0 +1,69 @@
+#!/bin/sh
+
+#
+# chkconfig: 35 99 01
+# description: init.d service script for RedHat 6.x compatible systems
+#
+
+. /etc/rc.d/init.d/functions
+
+USER="athlete"                    # ensure this user exists
+DAEMON="/usr/bin/node"
+ROOT_DIR="/home/athlete/realtime"
+SERVER="$ROOT_DIR/index.js"
+
+LOCK_FILE="/var/lock/subsys/node-realtime"
+
+do_start()
+{
+        if [ ! -f "$LOCK_FILE" ] ; then
+                echo -n $"Starting $SERVER: "
+                echo ""
+                runuser -l "$USER" -c "cd $ROOT_DIR && ./relaunch.sh" && echo_success || echo_failure
+                RETVAL=$?
+                echo
+                [ $RETVAL -eq 0 ] && touch $LOCK_FILE
+        else
+                echo "$SERVER is locked."
+                RETVAL=1
+        fi
+}
+do_stop()
+{
+        echo -n $"Stopping $SERVER: "
+        runuser -l "$USER" -c "cd $ROOT_DIR && ./shutdown.sh" && echo_success || echo_failure
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && rm -f $LOCK_FILE
+}
+
+do_status()
+{
+	PID=`ps aux | grep 'expose-gc' | grep -v "grep" | grep "\. $ROOT_DIR" | awk '{print $2}' `
+	if [ "$PID" != "" ]; then
+		echo "nodejs realtime system running on PID $PID."
+	else
+		echo "nodejs realtime system is not running."
+	fi
+}
+
+case "$1" in
+		status)
+                do_status
+                ;;
+        start)
+                do_start
+                ;;
+        stop)
+                do_stop
+                ;;
+        restart)
+                do_stop
+                do_start
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart|status}"
+                RETVAL=1
+esac
+
+exit $RETVAL
